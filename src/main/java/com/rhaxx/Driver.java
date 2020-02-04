@@ -3,10 +3,14 @@ package com.rhaxx;
 import com.rhaxx.models.Address;
 import com.rhaxx.models.Booking;
 import com.rhaxx.models.InfyDanceRegistration;
+import com.rhaxx.models.Intern;
+import com.rhaxx.models.MyMath;
 import com.rhaxx.models.PermanentEmployee;
 import com.rhaxx.models.Point;
 import com.rhaxx.models.RRAccount;
+import com.rhaxx.models.StudentInterface;
 import com.rhaxx.models.Triangle;
+import com.rhaxx.models.UndergraduateStudent;
 
 public class Driver {
 
@@ -60,6 +64,20 @@ public class Driver {
 		Address address2 = new Address("No. 123", "9th Cross, Trinethra Circle", "Mysuru", "Karnataka", 700171);
 		RRAccount rexRRA2 = new RRAccount("Rakesh", address2, 50000.00); // using the new address
 		System.out.println(rexRRA2.toString());
+
+		UndergraduateStudent Ajay = new UndergraduateStudent("Ajay");
+		Ajay.setTestScore(0, 70);
+		Ajay.setTestScore(1, 69);
+		Ajay.setTestScore(2, 71);
+		Ajay.setTestScore(3, 5);
+		Ajay.generateResult();
+		System.out.println("Name: " + Ajay.getName() + " Result: " + Ajay.getResult());
+
+		StudentInterface rexInt = new Intern(150, 200);
+		rexInt.calculatePercentage();
+
+		int[] data = { 2, 4, 5, 7, 6 };
+		System.out.println("Mean is : " + MyMath.mean(data) + " SD is : " + MyMath.deviation(data));
 	}
 
 	static void InfyTourney() {
