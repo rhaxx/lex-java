@@ -3,7 +3,7 @@ package com.rhaxx.models;
 public class Address {
 
 	private String firstline;
-	private String secondLine;
+	private String secondline;
 	private String city;
 	private String state;
 	private int zipCode;
@@ -12,10 +12,10 @@ public class Address {
 
 	}
 
-	public Address(String firstline, String secondLine, String city, String state, int zipCode) {
+	public Address(String firstline, String secondline, String city, String state, int zipCode) {
 		super();
 		this.firstline = firstline;
-		this.secondLine = secondLine;
+		this.secondline = secondline;
 		this.city = city;
 		this.state = state;
 		this.zipCode = zipCode;
@@ -29,12 +29,12 @@ public class Address {
 		this.firstline = firstline;
 	}
 
-	public String getSecondLine() {
-		return secondLine;
+	public String getSecondline() {
+		return secondline;
 	}
 
-	public void setSecondLine(String secondLine) {
-		this.secondLine = secondLine;
+	public void setSecondline(String secondline) {
+		this.secondline = secondline;
 	}
 
 	public String getCity() {

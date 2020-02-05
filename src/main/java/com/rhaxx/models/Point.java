@@ -16,6 +16,7 @@ public class Point {
 	}
 
 	public double distance() {
+		// distance from origin
 		return Math.sqrt(x * x + y * y);
 	}
 
