@@ -65,13 +65,13 @@ public class Driver {
 		RRAccount rexRRA2 = new RRAccount("Rakesh", address2, 50000.00); // using the new address
 		System.out.println(rexRRA2.toString());
 
-		UndergraduateStudent Ajay = new UndergraduateStudent("Ajay");
-		Ajay.setTestScore(0, 70);
-		Ajay.setTestScore(1, 69);
-		Ajay.setTestScore(2, 71);
-		Ajay.setTestScore(3, 5);
-		Ajay.generateResult();
-		System.out.println("Name: " + Ajay.getName() + " Result: " + Ajay.getResult());
+		UndergraduateStudent ajay = new UndergraduateStudent("ajay");
+		ajay.setTestScore(0, 70);
+		ajay.setTestScore(1, 69);
+		ajay.setTestScore(2, 71);
+		ajay.setTestScore(3, 5);
+		ajay.generateResult();
+		System.out.println("Name: " + ajay.getName() + " Result: " + ajay.getResult());
 
 		StudentInterface rexInt = new Intern(150, 200);
 		rexInt.calculatePercentage();
@@ -88,25 +88,25 @@ public class Driver {
 		} else if (cart.length > 10) {
 			discount = 0.2F;
 		}
-		int total_cost = 0;
+		int totalCost = 0;
 		for (String item : cart) {
 			switch (item) {
 			case "round-neck":
-				total_cost += 200;
+				totalCost += 200;
 				break;
 			case "collared":
-				total_cost += 250;
+				totalCost += 250;
 				break;
 			case "hooded":
-				total_cost += 300;
+				totalCost += 300;
 				break;
 			default:
 				System.out.println("wrong item in cart");
 				break;
 			}
 		}
-		float final_amount = (float) total_cost - (total_cost * discount);
-		System.out.println("The final price is Rs. " + final_amount);
+		float finalAmount = (float) totalCost - (totalCost * discount);
+		System.out.println("The final price is Rs. " + finalAmount);
 	}
 
 	static void DebuggingFibonacci() {
@@ -133,25 +133,25 @@ public class Driver {
 			sum += score;
 		}
 		float average = (float) sum / scores.length;
-		int above_avg = 0, equal_avg = 0, below_avg = 0;
+		int aboveAvg = 0, equalAvg = 0, belowAvg = 0;
 		for (int score : scores) {
 			if (score == average) {
-				equal_avg++;
+				equalAvg++;
 				continue;
 			}
 			if (score < average) {
-				below_avg++;
+				belowAvg++;
 				continue;
 			}
 			if (score > average) {
-				above_avg++;
+				aboveAvg++;
 				continue;
 			}
 		}
 		System.out.println("The average score of the team is " + average);
-		System.out.println("No. of matches having score above average is " + above_avg);
-		System.out.println("No. of matches having score equal average is " + equal_avg);
-		System.out.println("No. of matchines having score below average is " + below_avg);
+		System.out.println("No. of matches having score above average is " + aboveAvg);
+		System.out.println("No. of matches having score equal average is " + equalAvg);
+		System.out.println("No. of matchines having score below average is " + belowAvg);
 	}
 
 	static void AverageSale() {
