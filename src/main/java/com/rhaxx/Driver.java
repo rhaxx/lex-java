@@ -7,34 +7,36 @@ import com.rhaxx.models.Intern;
 import com.rhaxx.models.MyMath;
 import com.rhaxx.models.PermanentEmployee;
 import com.rhaxx.models.Point;
+import com.rhaxx.models.Product;
 import com.rhaxx.models.RRAccount;
 import com.rhaxx.models.StudentInterface;
 import com.rhaxx.models.Triangle;
 import com.rhaxx.models.UndergraduateStudent;
+import com.rhaxx.models.UniversePlanetarium;
 
 public class Driver {
 
 	public static void main(String[] args) {
-		// System.out.println("Command line argument is : " + args[0]);
-		// AverageSale();
-		// ReverseCalculator();
-		// LuckyNumber();
-		// CricketScore();
-		// DebuggingFibonacci();
-		// InfyTourney();
+		System.out.println("Command line argument is : " + args[0]);
+		AverageSale();
+		ReverseCalculator();
+		LuckyNumber();
+		CricketScore();
+		DebuggingFibonacci();
+		InfyTourney();
 
-		// Product phone = new Product();
-		// phone.displayDetails();
+		Product phone = new Product();
+		phone.displayDetails();
 
-		// UniversePlanetarium up = new UniversePlanetarium();
-		// up.bookSeat("rhaxx", 2);
-		// up.bookSeat("nate", 1000);
+		UniversePlanetarium up = new UniversePlanetarium();
+		up.bookSeat("rhaxx", 2);
+		up.bookSeat("nate", 1000);
 
-		// Point p1 = new Point(2, 3);
-		// System.out.println(p1.distance());
-		// Point p2 = new Point(5, 6);
-		// System.out.println(p2.distance());
-		// System.out.println(p1.distance(p2));
+		Point p4 = new Point(2, 3);
+		System.out.println(p4.distance());
+		Point p5 = new Point(5, 6);
+		System.out.println(p5.distance());
+		System.out.println(p4.distance(p5));
 
 		Point p1 = new Point(0, 0);
 		Point p2 = new Point(3, 0);
