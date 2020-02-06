@@ -8,12 +8,13 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name="application" level="INFO" additivity="false">
+		<Root level="ALL">
 			<AppenderRef ref="LogFile" />
-		</Logger>
+		</Root>
+		<!-- 
 		<Logger name="resources" level="INFO" additivity="false">
 			<AppenderRef ref="LogFile" />
 		</Logger>
-		<!-- <Root level="trace"/> -->
+		 -->
 	</Loggers>
 </Configuration>

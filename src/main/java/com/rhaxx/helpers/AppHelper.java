@@ -1,4 +1,4 @@
-package com.rhaxx.helper;
+package com.rhaxx.helpers;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,10 +1,12 @@
 package com.rhaxx;
 
+import org.apache.logging.log4j.Logger;
+
 import com.rhaxx.exceptions.InvalidAgeException;
 import com.rhaxx.exceptions.InvalidNameException;
 import com.rhaxx.exceptions.InvalidPostException;
-import com.rhaxx.helper.AppHelper;
-import com.rhaxx.helper.LogHelper;
+import com.rhaxx.helpers.AppHelper;
+import com.rhaxx.helpers.LogHelper;
 import com.rhaxx.models.Address;
 import com.rhaxx.models.Applicant;
 import com.rhaxx.models.Booking;
@@ -22,6 +24,8 @@ import com.rhaxx.models.UniversePlanetarium;
 import com.rhaxx.models.Validator;
 
 public class Driver {
+
+	final static Logger LOGGER = LogHelper.getLogger(Driver.class);
 
 	public static void main(String[] args) {
 		System.out.println("Command line argument is : " + args[0]);
@@ -88,22 +92,21 @@ public class Driver {
 		int[] data = { 2, 4, 5, 7, 6 };
 		System.out.println("Mean is : " + MyMath.mean(data) + " SD is : " + MyMath.deviation(data));
 
-		// Applicant applicant = new Applicant("Rex", "blah", 23); // causes
-		// invalidPostException
-		Applicant applicant = new Applicant("Rex", "Assistant", 23);
+		Applicant applicant = new Applicant("Rex", "wrong", 23); // triggers invalidPostException and writes it to ErrorLog
 		Validator validator = new Validator();
 		try {
 			validator.validate(applicant);
 		} catch (InvalidNameException e) {
-			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		} catch (InvalidPostException e) {
-			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		} catch (InvalidAgeException e) {
-			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 
 		System.out.println(AppHelper.PROPERTIES.getProperty("SUCCESS"));
 
+		LOGGER.info("Testing logging"); // directly testing LOGGING
 	}
 
 	static void InfyTourney() {
