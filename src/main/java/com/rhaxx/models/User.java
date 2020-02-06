@@ -8,7 +8,7 @@ public class User {
 	private double walletBalance;
 
 	public boolean makePayment(double billAmount) {
-		if (billAmount < walletBalance) {
+		if (billAmount > walletBalance) {
 			return false;
 		} else {
 			walletBalance -= billAmount;

@@ -1,6 +1,10 @@
 package com.rhaxx;
 
+import com.rhaxx.exceptions.InvalidAgeException;
+import com.rhaxx.exceptions.InvalidNameException;
+import com.rhaxx.exceptions.InvalidPostException;
 import com.rhaxx.models.Address;
+import com.rhaxx.models.Applicant;
 import com.rhaxx.models.Booking;
 import com.rhaxx.models.InfyDanceRegistration;
 import com.rhaxx.models.Intern;
@@ -13,6 +17,7 @@ import com.rhaxx.models.StudentInterface;
 import com.rhaxx.models.Triangle;
 import com.rhaxx.models.UndergraduateStudent;
 import com.rhaxx.models.UniversePlanetarium;
+import com.rhaxx.models.Validator;
 
 public class Driver {
 
@@ -80,6 +85,22 @@ public class Driver {
 
 		int[] data = { 2, 4, 5, 7, 6 };
 		System.out.println("Mean is : " + MyMath.mean(data) + " SD is : " + MyMath.deviation(data));
+	
+		// Applicant applicant = new Applicant("Rex", "blah", 23) // causes invalidPostException
+		Applicant applicant = new Applicant("Rex", "Assistant", 23);
+		Validator validator = new Validator();
+		try {
+			validator.validate(applicant);
+		} catch (InvalidNameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidPostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidAgeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	static void InfyTourney() {
