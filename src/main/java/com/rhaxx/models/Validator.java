@@ -14,7 +14,7 @@ public class Validator {
 		if (!isValidName(applicant.getApplicantName())) {
 			throw new InvalidNameException("invalid name");
 		} else if (!isValidPost(applicant.getPostApplied())) {
-			throw new InvalidPostException("invalid: Probationary Officer, Assistant, or Special Cadre Officer");
+			throw new InvalidPostException("invalid post");
 		} else if (!isValidAge(applicant.getApplicantAge())) {
 			throw new InvalidAgeException("invalid age");
 		} else {
@@ -23,8 +23,10 @@ public class Validator {
 	}
 
 	public boolean isValidName(String name) {
-		if (name != null || name.length() != 0) {
-			return true;
+		if (name != null) {
+			if (name.length() != 0) {
+				return true;
+			}
 		}
 		return false;
 	}

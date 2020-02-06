@@ -3,6 +3,8 @@ package com.rhaxx;
 import com.rhaxx.exceptions.InvalidAgeException;
 import com.rhaxx.exceptions.InvalidNameException;
 import com.rhaxx.exceptions.InvalidPostException;
+import com.rhaxx.helper.AppHelper;
+import com.rhaxx.helper.LogHelper;
 import com.rhaxx.models.Address;
 import com.rhaxx.models.Applicant;
 import com.rhaxx.models.Booking;
@@ -85,22 +87,23 @@ public class Driver {
 
 		int[] data = { 2, 4, 5, 7, 6 };
 		System.out.println("Mean is : " + MyMath.mean(data) + " SD is : " + MyMath.deviation(data));
-	
-		// Applicant applicant = new Applicant("Rex", "blah", 23) // causes invalidPostException
+
+		// Applicant applicant = new Applicant("Rex", "blah", 23); // causes
+		// invalidPostException
 		Applicant applicant = new Applicant("Rex", "Assistant", 23);
 		Validator validator = new Validator();
 		try {
 			validator.validate(applicant);
 		} catch (InvalidNameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
 		} catch (InvalidPostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
 		} catch (InvalidAgeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogHelper.getLogger(Driver.class).error(e.getMessage(), e);
 		}
+
+		System.out.println(AppHelper.PROPERTIES.getProperty("SUCCESS"));
+
 	}
 
 	static void InfyTourney() {
