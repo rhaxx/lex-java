@@ -10,10 +10,12 @@ import com.rhaxx.helpers.LogHelper;
 import com.rhaxx.models.Address;
 import com.rhaxx.models.Applicant;
 import com.rhaxx.models.Booking;
+import com.rhaxx.models.Customer;
 import com.rhaxx.models.InfyDanceRegistration;
 import com.rhaxx.models.Intern;
 import com.rhaxx.models.MyMath;
 import com.rhaxx.models.PermanentEmployee;
+import com.rhaxx.models.PigLatin;
 import com.rhaxx.models.Point;
 import com.rhaxx.models.Product;
 import com.rhaxx.models.RRAccount;
@@ -107,6 +109,13 @@ public class Driver {
 		System.out.println(AppHelper.PROPERTIES.getProperty("SUCCESS"));
 
 		LOGGER.info("Testing logging"); // directly testing LOGGING
+		
+		Customer cust = new Customer();
+		cust.findDiscountAndName("Regular:Rhaxx");
+		
+		PigLatin pl = new PigLatin();
+		pl.pigLatinConverter("rexut");
+		
 	}
 
 	static void InfyTourney() {
