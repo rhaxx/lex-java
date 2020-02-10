@@ -1,5 +1,16 @@
 package com.rhaxx;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.apache.logging.log4j.Logger;
 
 import com.rhaxx.exceptions.InvalidAgeException;
@@ -94,7 +105,8 @@ public class Driver {
 		int[] data = { 2, 4, 5, 7, 6 };
 		System.out.println("Mean is : " + MyMath.mean(data) + " SD is : " + MyMath.deviation(data));
 
-		Applicant applicant = new Applicant("Rex", "wrong", 23); // triggers invalidPostException and writes it to ErrorLog
+		Applicant applicant = new Applicant("Rex", "wrong", 23); // triggers invalidPostException and writes it to
+																	// ErrorLog
 		Validator validator = new Validator();
 		try {
 			validator.validate(applicant);
@@ -109,13 +121,146 @@ public class Driver {
 		System.out.println(AppHelper.PROPERTIES.getProperty("SUCCESS"));
 
 		LOGGER.info("Testing logging"); // directly testing LOGGING
-		
+
 		Customer cust = new Customer();
 		cust.findDiscountAndName("Regular:Rhaxx");
-		
+
 		PigLatin pl = new PigLatin();
 		pl.pigLatinConverter("rexut");
-		
+
+		System.out.println(isPasswordValid("ReXa123"));
+
+		System.out.println(isValidWebAddress("www.google.com"));
+		System.out.println(isValidWebAddress("google.com"));
+		System.out.println(isValidWebAddress("https://www.google.com"));
+		System.out.println(isValidWebAddress("http://www.google.com"));
+		System.out.println(isValidWebAddress("aosmoasognaosngkas_(@*(#.com"));
+
+		List<String> orders = new ArrayList<String>();
+		orders.add("Tortilla");
+		orders.add("Sandwich");
+		orders.add("Fried rice");
+		orders.add("Pasta");
+		orders.add("Burger");
+		orders.add("Pizza");
+		orders.add("Pasta");
+		orders.add("Burger");
+
+		// Check whether orders contain any item
+		if (orders.isEmpty()) {
+			System.out.println("No orders available!!");
+		}
+
+		// Display the number of orders in the list
+		System.out.println("Numbers of orders: " + orders.size());
+
+		List<String> newOrders = new ArrayList<String>();
+		newOrders.add("Tortilla");
+		newOrders.add("Cutlet");
+		newOrders.add("Fried Egg");
+
+		// Adding this newOrders list into the existing orders
+		orders.addAll(newOrders);
+
+		// Removing "Burger" item from the orders
+		orders.remove("Burger");
+
+		// Removing first item from the orders
+		orders.remove(0);
+
+		// Display all orders
+		System.out.println("The items available in the order are: ");
+		System.out.println("========================================");
+		for (String order : orders) {
+			System.out.println(order);
+		}
+		System.out.println("========================================");
+
+		// Checking whether Pasta is ordered or not
+		if (orders.contains("Pasta")) {
+			System.out.println("Pasta is ordered already!!!");
+		} else {
+			System.out.println("No Pasta ordered!!");
+		}
+
+		// Converting list to array
+		Object[] ordersArray = orders.toArray();
+		for (Object obj : ordersArray) {
+			System.out.println(obj);
+		}
+
+		// Deleting all the items from the orders
+		orders.clear();
+
+		System.out.println(orders.isEmpty());
+
+		Set s = new TreeSet();
+		s.add("4");
+		s.add(8);
+		Iterator itr = s.iterator();
+		while (itr.hasNext())
+			System.out.print(itr.next() + " ");
+
+		// Sample list of orders
+		orders.add("Tortilla");
+		orders.add("Sandwich");
+		orders.add("Fried rice");
+		orders.add("Pasta");
+		orders.add("Burger");
+		orders.add("Pizza");
+		orders.add("Pasta");
+		orders.add("Burger");
+
+		Map<String, Integer> itemMap = new HashMap<String, Integer>();
+
+		for (String item : orders) {
+			if (itemMap.containsKey(item)) {
+				itemMap.put(item, itemMap.get(item) + 1);
+			} else
+				itemMap.put(item, 1);
+		}
+
+		// Today's date
+		LocalDate today = LocalDate.now();
+		System.out.println("Today's date is " + today);
+
+		// Change to your birthday (year, month, dayOfMonth)
+		LocalDate yourDOB = LocalDate.of(1995, 8, 25);
+		System.out.println("Your birthday is on " + yourDOB);
+
+		// Your age
+		System.out.println("Your age is " + yourDOB.until(today, ChronoUnit.YEARS) + " years");
+
+		// Change to your friend's birthday (year, month, dayOfMonth)
+		LocalDate yourFriendsDOB = LocalDate.of(1996, 3, 15);
+		String olderOrYounger = yourDOB.isAfter(yourFriendsDOB) ? "younger" : "older"; // Using ternary operator
+		System.out.println("You are " + olderOrYounger + " than your friend");
+
+		// Is this a leap year?
+		System.out.println("This is a leap year: " + today.isLeapYear());
+
+		// This month
+		System.out.println("This month is " + today.getMonth());
+
+		// This day
+		System.out.println("Today is " + today.getDayOfWeek());
+
+		// 4 days from today
+		System.out.println("4 days from today will be " + today.plusDays(4).getDayOfWeek());
+
+	}
+
+	public static boolean isAgeEligible(LocalDate dob) {
+		LocalDate today = LocalDate.now();
+		if (dob.until(today, ChronoUnit.YEARS) >= 50)
+			return true;
+		else
+			return false;
+	}
+
+	public static LocalDate stringToLocalDate(String date) {
+		String pattern = "dd-MMM-yyyy";
+		return LocalDate.parse(date, DateTimeFormatter.ofPattern(pattern));
 	}
 
 	static void InfyTourney() {
@@ -242,5 +387,20 @@ public class Driver {
 		} else {
 			System.out.println("OOOOOPS! Not a lucky number");
 		}
+	}
+
+	static boolean isPasswordValid(String password) {
+		String regex = "[A-Za-z]{2,4}[0-9]{3}"; // 2 to 4 alphabetic with 3 numeric password
+		return password.matches(regex);
+	}
+
+	static boolean isValidWebAddress(String webAddress) {
+		String regex = "(https?:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.(com|org|net)";
+		return webAddress.matches(regex);
+	}
+
+	static boolean isRegex(String blah) {
+		String regex = "([^\\\\W]+)-[Infosys]+";
+		return blah.matches(regex);
 	}
 }
