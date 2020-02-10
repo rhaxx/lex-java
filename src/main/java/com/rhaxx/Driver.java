@@ -194,10 +194,10 @@ public class Driver {
 
 		System.out.println(orders.isEmpty());
 
-		Set s = new TreeSet();
+		Set<String> s = new TreeSet<String>();
 		s.add("4");
-		s.add(8);
-		Iterator itr = s.iterator();
+		s.add("8");
+		Iterator<String> itr = s.iterator();
 		while (itr.hasNext())
 			System.out.print(itr.next() + " ");
 

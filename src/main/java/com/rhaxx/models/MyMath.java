@@ -21,7 +21,7 @@ public class MyMath {
 	}
 
 	public MyMath() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 }
