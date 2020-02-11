@@ -1,6 +1,8 @@
 package com.rhaxx;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -248,6 +250,74 @@ public class Driver {
 		// 4 days from today
 		System.out.println("4 days from today will be " + today.plusDays(4).getDayOfWeek());
 
+		LocalDate date = LocalDate.of(2017, 07, 21);
+		System.out.println(date.format(DateTimeFormatter.ofPattern("dd-MMM-YYYY")));
+		String swipeInTime = "Tuesday, Aug 16, 2016 12:10:56 PM";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("eeee, MMM d, yyyy hh:mm:ss a");
+
+		LocalDate dob = LocalDate.of(1996, 12, 28);
+		LocalDate now = LocalDate.now();
+		int year = now.getYear() - dob.getYear();
+		int month = now.getMonthValue() - dob.getMonthValue();
+		int dayOfMonth = now.getDayOfMonth() - dob.getDayOfMonth();
+
+		if (dayOfMonth < 0) {
+			if (month < 0) {
+				year = now.getYear() - dob.getYear() - 1;
+				month = -month - 1;
+				dayOfMonth = -dayOfMonth;
+				System.out.println(year + " " + month + " " + dayOfMonth);
+			} else {
+				year = now.getYear() - dob.getYear();
+				dayOfMonth = -dayOfMonth;
+				System.out.println(year + " " + month + " " + dayOfMonth);
+			}
+		}
+		LocalDate age = LocalDate.of(year, month, dayOfMonth);
+		System.out.println(age.format(DateTimeFormatter.ofPattern("dd-MMM-YYYY")));
+
+		String examStartString = "24 August, 2017, 9:30 AM";
+		String examEndString = "24 August, 2017, 11:30 AM";
+		// Code here
+		try {
+			System.out.println(isValidExamDateTime(examStartString, examEndString));
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(23);
+		list.add(21);
+		list.add(10);
+		list.add(5);
+		list.sort( (arg1, arg2) -> arg1.compareTo(arg2));
+
+	    for (Integer i : list) System.out.println(i);
+	}
+
+	public static boolean isValidExamDateTime(String examStartString, String examEndString) throws Exception {
+		// Code here
+		LocalDateTime examStartObj = getDateTimeFromString(examStartString);
+		LocalDateTime examEndObj = getDateTimeFromString(examEndString);
+		LocalDateTime now = LocalDateTime.now();
+		int hour = examStartObj.getHour();
+		if (examStartObj.isBefore(now))
+			throw new Exception("PAST_EXAM");
+		if (examStartObj.getDayOfWeek() == DayOfWeek.SATURDAY || examStartObj.getDayOfWeek() == DayOfWeek.SUNDAY)
+			throw new Exception("WEEKEND_DATE");
+		if (examStartObj.isAfter(now.plusWeeks(1)))
+			throw new Exception("DATE_AFTER_7_DAYS");
+		if (examStartObj.plusHours(2) != examEndObj)
+			throw new Exception("INVALID_DURATION");
+		if (hour < 9 && hour > 12 || hour < 15 && hour > 18)
+			throw new Exception("INVALID_SLOT");
+		return true;
+	}
+
+	public static LocalDateTime getDateTimeFromString(String dateStr) {
+		// Code here
+		String pattern = "dd MMMM, yyyy, h:mm a";
+		return LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern(pattern));
 	}
 
 	public static boolean isAgeEligible(LocalDate dob) {
@@ -402,5 +472,15 @@ public class Driver {
 	static boolean isRegex(String blah) {
 		String regex = "([^\\\\W]+)-[Infosys]+";
 		return blah.matches(regex);
+	}
+
+	static void ageCalculator(LocalDate dob) {
+		LocalDate now = LocalDate.now();
+		int year = now.getYear() - dob.getYear();
+		int month = now.getMonthValue() - dob.getMonthValue();
+		int dayOfMonth = now.getDayOfMonth() - dob.getDayOfMonth();
+		LocalDate age = LocalDate.of(year, month, dayOfMonth);
+		System.out.println(age.format(DateTimeFormatter.ofPattern("dd-MMM-YYYY")));
+
 	}
 }
