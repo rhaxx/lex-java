@@ -22,6 +22,7 @@ import com.rhaxx.helpers.AppHelper;
 import com.rhaxx.helpers.LogHelper;
 import com.rhaxx.models.Address;
 import com.rhaxx.models.Applicant;
+import com.rhaxx.models.Arithmetic;
 import com.rhaxx.models.Booking;
 import com.rhaxx.models.Customer;
 import com.rhaxx.models.InfyDanceRegistration;
@@ -293,6 +294,15 @@ public class Driver {
 		list.sort( (arg1, arg2) -> arg1.compareTo(arg2));
 
 	    for (Integer i : list) System.out.println(i);
+	    
+	    /*
+	     * functional interfaces using lambda expressions
+	     */
+	    Arithmetic addition = (int a, int b) -> a + b;
+	    Arithmetic subtraction = (int a, int b) -> a - b;
+	    Arithmetic multiplication = (int a, int b) -> a * b;
+	    Arithmetic division = (int a, int b) -> a / b;
+	    System.out.println(addition.operation(5, 6));
 	}
 
 	public static boolean isValidExamDateTime(String examStartString, String examEndString) throws Exception {
