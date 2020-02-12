@@ -25,8 +25,10 @@ import com.rhaxx.models.Applicant;
 import com.rhaxx.models.Arithmetic;
 import com.rhaxx.models.Booking;
 import com.rhaxx.models.Customer;
+import com.rhaxx.models.GlitzItem;
 import com.rhaxx.models.InfyDanceRegistration;
 import com.rhaxx.models.Intern;
+import com.rhaxx.models.ItemType;
 import com.rhaxx.models.MyMath;
 import com.rhaxx.models.PermanentEmployee;
 import com.rhaxx.models.PigLatin;
@@ -285,24 +287,61 @@ public class Driver {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
-		
+
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(23);
 		list.add(21);
 		list.add(10);
 		list.add(5);
-		list.sort( (arg1, arg2) -> arg1.compareTo(arg2));
+		list.sort((arg1, arg2) -> arg1.compareTo(arg2));
 
-	    for (Integer i : list) System.out.println(i);
-	    
-	    /*
-	     * functional interfaces using lambda expressions
-	     */
-	    Arithmetic addition = (int a, int b) -> a + b;
-	    Arithmetic subtraction = (int a, int b) -> a - b;
-	    Arithmetic multiplication = (int a, int b) -> a * b;
-	    Arithmetic division = (int a, int b) -> a / b;
-	    System.out.println(addition.operation(5, 6));
+		for (Integer i : list)
+			System.out.println(i);
+
+		/*
+		 * functional interfaces using lambda expressions
+		 */
+		Arithmetic addition = (int a, int b) -> a + b;
+		Arithmetic subtraction = (int a, int b) -> a - b;
+		Arithmetic multiplication = (int a, int b) -> a * b;
+		Arithmetic division = (int a, int b) -> a / b;
+		System.out.println(addition.operation(5, 6));
+		
+		GlitzItem item1 = new GlitzItem(1, "Necklace", ItemType.GOLD, 19, 2);
+		GlitzItem item2 = new GlitzItem(2, "Bangle", ItemType.GOLD, 12, 4);
+		GlitzItem item3 = new GlitzItem(3, "Coin", ItemType.SILVER, 13, 5);
+		GlitzItem item4 = new GlitzItem(4, "Ring", ItemType.SILVER, 14, 6);
+		
+		List<GlitzItem> items = new ArrayList<GlitzItem>();
+		items.add(item1);
+		items.add(item2);
+		items.add(item3);
+		items.add(item4);
+		
+		filterMapSortPriceByItemType(items, ItemType.GOLD);
+	}
+	
+	public static void filterMapSortPriceByItemType(List<GlitzItem> items, ItemType itemType) {
+		System.out.println(itemType.toString());
+		items.stream().filter(f -> f.getItemType() == itemType)
+		.map(w -> w.getWeightInGrams())
+		.sorted()
+		.forEach(weight -> {
+			double sum = 0.0;
+			double newWeight = 0.0;
+			if (itemType.toString() == "GOLD") {
+				newWeight = weight * (weight * 0.15) * 2700;
+				System.out.println(newWeight);
+				sum += newWeight;
+			} else if (itemType.toString() == "SILVER") {
+				newWeight = weight * (weight * 0.15) * 34;
+				System.out.println(newWeight);
+			}
+		});
+	}
+
+	public void sortAccordingToWeight(List<GlitzItem> items) {
+		items.stream().map(item -> item.getWeightInGrams()).sorted().forEach(weight -> System.out.println(weight));;
 	}
 
 	public static boolean isValidExamDateTime(String examStartString, String examEndString) throws Exception {
